@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script>
-     <script>
-  fetch("https://script.google.com/macros/s/AKfycbwSmCpZJEB7AKQkCX3lPCUe1DOUKl3Qxv0_uG7RIsVMCw0Zfz3yKPQURVSfnjZ9MBtyPw/exec")
-    .then(response => response.text())
-    .then(url => {
-      if (url.startsWith("http")) {
-        window.location.href = url;
-      } else {
-        document.body.innerText = url;
-      }
-    });
-</script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AM Redirect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .message {
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="message" class="message">
+    Redirecting...
+  </div>
+  <script>
+    // Replace with your actual Google Apps Script Web App URL
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbwSmCpZJEB7AKQkCX3lPCUe1DOUKl3Qxv0_uG7RIsVMCw0Zfz3yKPQURVSfnjZ9MBtyPw/exec";
 
-        });
-    </script>
-  </head>
-  <body>
-    <p>Redirecting to today’s album...</p>
-  </body>
+    fetch(scriptUrl)
+      .then(response => response.text())
+      .then(url => {
+        // If the response is a valid URL, redirect
+        if (url.startsWith("http")) {
+          window.location.href = url;
+        } else {
+          // If no valid URL, show the message
+          document.getElementById('message').innerText = url;
+        }
+      })
+      .catch(error => {
+        // Handle errors (e.g., network issues)
+        document.getElementById('message').innerText = "Something went wrong. Please try again later.";
+      });
+  </script>
+</body>
 </html>
